@@ -1,64 +1,41 @@
 import React, { Fragment } from 'react';
-import { AppBar, makeStyles, Typography, List, ListItemText, Button } from '@material-ui/core';
+import { AppBar, Typography, List, ListItemText, Button } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
+import { useStyles } from '../css/styles';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 500,
-    padding: 10,
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
-  title: {
-    flexGrow: 1
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: 10
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    maxWidth: 250
-  },
-  focused: {},
-
-  controlBtns: {
-    maxWidth: 400,
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: 15,
-    marginBottom: 15,
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
-  center: {
-    display: 'block',
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
-  confirmList: {
-    maxWidth: 250,
-    marginTop: 10,
-    backgroundColor: theme.palette.background.paper
-  },
-  button: {
-    margin: theme.spacing(2)
-  }
-}));
-
-function generate(element) {
-  return [0, 1, 2, 3].map(value =>
-    React.cloneElement(element, {
-      key: value
-    })
-  );
-}
-
-function Confirm() {
+function Confirm(props) {
   const classes = useStyles();
+
+  const userInfo = [];
+  for (let field in props.enteredValues) {
+    userInfo.push(field);
+  }
+  const summaryList = userInfo.map((info, index) => {
+    return (
+      <ListItem key={index}>
+        <ListItemText className="listText" primary={info} secondary={props.enteredValues[info]} />
+      </ListItem>
+    );
+  });
+  // for (let value of props.enteredValues) {
+  //   <ListItemText primary="ddd" />;
+  // }
+
+  console.log(userInfo);
+
+  // on click, update step state by calling handleNextStep
+  const handleNextBtnClick = e => {
+    console.log(props);
+    // e.preventDefault();
+    // process form
+    // send your data to your API (flux, python php)
+    props.handleNextStep();
+  };
+
+  const handlePrevBtnClick = () => {
+    props.handlePrevStep();
+  };
+
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
@@ -68,21 +45,25 @@ function Confirm() {
       </AppBar>
 
       <div className={`${classes.center} ${classes.confirmList}`}>
-        <List>
-          {generate(
-            <ListItem>
-              <ListItemText primary="Single-line item" />
-            </ListItem>
-          )}
-        </List>
+        <List>{summaryList}</List>
+        {/* <List>{generate(<ListItem>{listSummary}</ListItem>)}</List> */}
       </div>
 
       <div className={classes.controlBtns}>
-        <Button variant="contained" className={classes.button}>
+        <Button
+          variant="contained"
+          className={`${classes.button} ${classes.alignLeft}`}
+          onClick={handlePrevBtnClick}
+        >
           Back
         </Button>
 
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={`${classes.button} ${classes.alignRigth}`}
+          onClick={handleNextBtnClick}
+        >
           Confirm & Next
         </Button>
       </div>
@@ -91,3 +72,4 @@ function Confirm() {
 }
 
 export default Confirm;
+// export { Confirm as default };

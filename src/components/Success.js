@@ -1,39 +1,6 @@
 import React, { Fragment } from 'react';
-import { AppBar, makeStyles, Typography, Button } from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 500,
-    padding: 10,
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
-  title: {
-    flexGrow: 1
-  },
-  controlBtns: {
-    maxWidth: 400,
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: 15,
-    marginBottom: 15,
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
-  center: {
-    display: 'block',
-    marginRight: 'auto',
-    marginLeft: 'auto'
-  },
-  successMessage: {
-    marginTop: 16,
-    marginBottom: 16
-  },
-  button: {
-    margin: theme.spacing(2)
-  }
-}));
+import { AppBar, Typography } from '@material-ui/core';
+import { useStyles } from '../css/styles';
 
 function Success() {
   const classes = useStyles();
