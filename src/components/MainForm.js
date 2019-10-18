@@ -53,7 +53,7 @@ class MainForm extends Component {
     let formErrors = { ...this.state.formErrors };
     formErrors[target.id] = '';
     this.setState({ formErrors });
-    or using
+    // or using
     // this.setState(state => (state.formErrors[target.id] = ''));
   };
 
