@@ -20,6 +20,14 @@ function FormPersonalDetails(props) {
     props.onFieldChange(e.target);
   };
 
+  const handleFocus = e => {
+    props.onFieldFocus(e.target);
+  };
+
+  const handleBlur = e => {
+    props.onFieldBlur(e.target);
+  };
+
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
@@ -34,8 +42,20 @@ function FormPersonalDetails(props) {
         className={`${classes.center} ${classes.textField}`}
         fullWidth={true}
         value={props.inputValue.city}
+        error={props.formErrors.city.length > 0 ? true : false}
         onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
+      {props.formErrors.city.length > 0 && (
+        <Typography
+          variant="body2"
+          className={`${classes.title} ${classes.errorMessage}`}
+          align="center"
+        >
+          {props.formErrors.city}
+        </Typography>
+      )}
       <TextField
         id="bio"
         label="Bio"
@@ -45,8 +65,20 @@ function FormPersonalDetails(props) {
         fullWidth={true}
         margin="normal"
         value={props.inputValue.bio}
+        error={props.formErrors.bio.length > 0 ? true : false}
         onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
+      {props.formErrors.bio.length > 0 && (
+        <Typography
+          variant="body2"
+          className={`${classes.title} ${classes.errorMessage}`}
+          align="center"
+        >
+          {props.formErrors.bio}
+        </Typography>
+      )}
 
       <div className={classes.controlBtns}>
         <Button

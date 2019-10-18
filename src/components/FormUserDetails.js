@@ -14,7 +14,17 @@ function FormUserDetails(props) {
   const handleChange = e => {
     e.preventDefault();
     props.onFieldChange(e.target);
+    console.log(props.formErrors);
   };
+
+  const handleFocus = e => {
+    props.onFieldFocus(e.target);
+  };
+
+  const handleBlur = e => {
+    props.onFieldBlur(e.target);
+  };
+  console.log(props.formErrors);
 
   return (
     <Fragment>
@@ -23,7 +33,6 @@ function FormUserDetails(props) {
           Enter Personal Details
         </Typography>
       </AppBar>
-
       <TextField
         id="name"
         label="Name"
@@ -32,8 +41,20 @@ function FormUserDetails(props) {
         className={`${classes.center} ${classes.textField}`}
         fullWidth={true}
         value={props.inputValue.name}
+        error={props.formErrors.name.length > 0 ? true : false}
         onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
+      {props.formErrors.name.length > 0 && (
+        <Typography
+          variant="body2"
+          className={`${classes.title} ${classes.errorMessage}`}
+          align="center"
+        >
+          {props.formErrors.name}
+        </Typography>
+      )}
 
       <TextField
         id="email"
@@ -43,9 +64,20 @@ function FormUserDetails(props) {
         className={`${classes.center} ${classes.textField}`}
         fullWidth={true}
         value={props.inputValue.email}
+        error={props.formErrors.email.length > 0 ? true : false}
         onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
-
+      {props.formErrors.email.length > 0 && (
+        <Typography
+          variant="body2"
+          className={`${classes.title} ${classes.errorMessage}`}
+          align="center"
+        >
+          {props.formErrors.email}
+        </Typography>
+      )}
       <div className={classes.controlBtns}>
         <Button
           variant="contained"

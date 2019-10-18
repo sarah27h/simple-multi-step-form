@@ -56,5 +56,8 @@ export const useStyles = makeStyles(theme => ({
   successMessage: {
     marginTop: 16,
     marginBottom: 16
+  },
+  errorMessage: {
+    color: 'red'
   }
 }));

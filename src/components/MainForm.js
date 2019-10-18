@@ -4,13 +4,30 @@ import FormPersonalDetails from './FormPersonalDetails';
 import Confirm from './Confirm';
 import Success from './Success';
 
+// using validation outside state isn't optimal because we are putting the validation logic into render method,
+//  which will turn the method into spaghetti real fast when we are validating lots of data.
+// It also run even before we do anything with the textbox.
+// That's not good.
+// const formErrors = {
+//   name: '',
+//   email: '',
+//   city: '',
+//   bio: ''
+// };
+
 class MainForm extends Component {
   state = {
     step: 1,
     name: '',
     email: '',
     city: '',
-    bio: ''
+    bio: '',
+    formErrors: {
+      name: '',
+      email: '',
+      city: '',
+      bio: ''
+    }
   };
 
   // go to next step
@@ -30,6 +47,39 @@ class MainForm extends Component {
     this.setState({ [target.id]: target.value });
   };
 
+  // hides the error message (on blur it will be checked again)
+  fieldFocus = target => {
+    // update nested react nested state properties
+    // let formErrors = { ...this.state.formErrors };
+    // formErrors[target.id] = '';
+    // this.setState({ formErrors });
+    this.setState(state => ((state.formErrors[target.id] = ''), state));
+  };
+
+  // checks if the field is valid, and if not – shows an error
+  fieldBlur = target => {
+    let formErrors = { ...this.state.formErrors };
+    switch (target.id) {
+      case 'name':
+        formErrors[target.id] = target.value.length < 3 ? 'minimum 3 characaters required' : '';
+        break;
+      case 'email':
+        formErrors[target.id] = !target.value.includes('@')
+          ? 'minimum 3 characaters, contain @ required'
+          : '';
+        break;
+      case 'city':
+        formErrors[target.id] = target.value.length < 3 ? 'minimum 3 characaters required' : '';
+        break;
+      case 'bio':
+        formErrors[target.id] = 250 <= target.value.length ? 'maximum 250 character required' : '';
+        break;
+      default:
+        break;
+    }
+    this.setState({ formErrors });
+  };
+
   render() {
     const { step, name, email, city, bio } = this.state;
 
@@ -43,6 +93,9 @@ class MainForm extends Component {
             handleNextStep={this.nextStep}
             onFieldChange={this.fieldChange}
             inputValue={this.state}
+            onFieldFocus={this.fieldFocus}
+            onFieldBlur={this.fieldBlur}
+            formErrors={this.state.formErrors}
           />
         );
 
@@ -53,6 +106,9 @@ class MainForm extends Component {
             handlePrevStep={this.prevStep}
             onFieldChange={this.fieldChange}
             inputValue={this.state}
+            onFieldFocus={this.fieldFocus}
+            onFieldBlur={this.fieldBlur}
+            formErrors={this.state.formErrors}
           />
         );
       case 3:
