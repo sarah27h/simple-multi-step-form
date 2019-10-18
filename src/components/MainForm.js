@@ -50,10 +50,11 @@ class MainForm extends Component {
   // hides the error message (on blur it will be checked again)
   fieldFocus = target => {
     // update nested react nested state properties
-    // let formErrors = { ...this.state.formErrors };
-    // formErrors[target.id] = '';
-    // this.setState({ formErrors });
-    this.setState(state => ((state.formErrors[target.id] = ''), state));
+    let formErrors = { ...this.state.formErrors };
+    formErrors[target.id] = '';
+    this.setState({ formErrors });
+    or using
+    // this.setState(state => (state.formErrors[target.id] = ''));
   };
 
   // checks if the field is valid, and if not – shows an error
