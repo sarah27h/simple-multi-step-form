@@ -10,7 +10,12 @@ export const useStyles = makeStyles(theme => ({
     marginTop: 20
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontSize: '1rem'
+  },
+  formTitle: {
+    fontSize: '1.25rem',
+    margin: '5px 0'
   },
   container: {
     display: 'flex',
@@ -53,9 +58,12 @@ export const useStyles = makeStyles(theme => ({
   listText: {
     wordBreak: 'break-word'
   },
-  successMessage: {
+  messageContainer: {
     marginTop: 16,
     marginBottom: 16
+  },
+  successMessage: {
+    margin: '20px 0'
   },
   errorMessage: {
     color: 'red'
