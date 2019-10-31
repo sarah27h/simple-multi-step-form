@@ -27,7 +27,28 @@ class MainForm extends Component {
       email: '',
       city: '',
       bio: ''
-    }
+    },
+    validate: true
+  };
+
+  formValidate = ({ formErrors, validate, step, ...rest }) => {
+    console.log(formErrors, validate, step);
+    console.log(rest, 'tesssst');
+    this.setState({ validate: true });
+
+    Object.values(rest).forEach(value => {
+      if (value === '') {
+        this.setState({ validate: false });
+      }
+    });
+
+    Object.values(formErrors).forEach(value => {
+      if (value.length > 0) {
+        this.setState({ validate: false });
+      }
+    });
+
+    console.log(':( :(');
   };
 
   // go to next step
@@ -52,6 +73,7 @@ class MainForm extends Component {
     // update nested react nested state properties
     let formErrors = { ...this.state.formErrors };
     formErrors[target.id] = '';
+
     this.setState({ formErrors });
     // or using
     // this.setState(state => (state.formErrors[target.id] = ''));
@@ -63,11 +85,10 @@ class MainForm extends Component {
     switch (target.id) {
       case 'name':
         formErrors[target.id] = target.value.length < 3 ? 'minimum 3 characaters required' : '';
+
         break;
       case 'email':
-        formErrors[target.id] = !target.value.includes('@')
-          ? 'minimum 3 characaters, contain @ required'
-          : '';
+        formErrors[target.id] = !target.value.includes('@') ? 'contain @ required' : '';
         break;
       case 'city':
         formErrors[target.id] = target.value.length < 3 ? 'minimum 3 characaters required' : '';
@@ -110,6 +131,7 @@ class MainForm extends Component {
             onFieldFocus={this.fieldFocus}
             onFieldBlur={this.fieldBlur}
             formErrors={this.state.formErrors}
+            formValidate={this.formValidate}
           />
         );
       case 3:
@@ -118,6 +140,7 @@ class MainForm extends Component {
             handleNextStep={this.nextStep}
             handlePrevStep={this.prevStep}
             enteredValues={enteredValues}
+            inputValue={this.state}
           />
         );
       case 4:
