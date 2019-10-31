@@ -8,6 +8,7 @@ function FormPersonalDetails(props) {
   // on click, update step state by calling handleNextStep
   const handleNextBtnClick = () => {
     props.handleNextStep();
+    props.formValidate(props.inputValue);
   };
 
   const handlePrevBtnClick = () => {
@@ -31,10 +32,11 @@ function FormPersonalDetails(props) {
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
-        <Typography variant="h6" className={classes.title} align="center">
+        <Typography variant="h1" className={classes.formTitle} align="center">
           Enter Personal Details
         </Typography>
       </AppBar>
+
       <TextField
         id="city"
         label="City"
@@ -46,16 +48,22 @@ function FormPersonalDetails(props) {
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        aria-describedby="city-error"
+        aria-invalid="false"
       />
+
       {props.formErrors.city.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
           align="center"
+          id="city-erro"
+          aria-live="assertive"
         >
-          {props.formErrors.city}
+          Error: city require {props.formErrors.city}
         </Typography>
       )}
+
       <TextField
         id="bio"
         label="Bio"
@@ -65,18 +73,24 @@ function FormPersonalDetails(props) {
         fullWidth={true}
         margin="normal"
         value={props.inputValue.bio}
+        helperText={`character Numbers ${props.inputValue.bio.length}`}
         error={props.formErrors.bio.length > 0 ? true : false}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        aria-describedby="bio-error"
+        aria-invalid="false"
       />
+
       {props.formErrors.bio.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
           align="center"
+          id="bio-error"
+          aria-live="assertive"
         >
-          {props.formErrors.bio}
+          Error: bio character Numbers {props.inputValue.bio.length} and {props.formErrors.bio}
         </Typography>
       )}
 

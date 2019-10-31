@@ -29,10 +29,11 @@ function FormUserDetails(props) {
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
-        <Typography variant="h6" className={classes.title} align="center">
+        <Typography variant="h1" className={classes.formTitle} align="center">
           Enter Personal Details
         </Typography>
       </AppBar>
+
       <TextField
         id="name"
         label="Name"
@@ -45,14 +46,17 @@ function FormUserDetails(props) {
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        aria-describedby="name-error"
       />
       {props.formErrors.name.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
           align="center"
+          id="name-error"
+          aria-live="assertive"
         >
-          {props.formErrors.name}
+          Error: name require {props.formErrors.name}
         </Typography>
       )}
 
@@ -68,16 +72,21 @@ function FormUserDetails(props) {
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        aria-describedby="email-error"
       />
+
       {props.formErrors.email.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
           align="center"
+          id="email-error"
+          aria-live="assertive"
         >
-          {props.formErrors.email}
+          Error: email require {props.formErrors.email}
         </Typography>
       )}
+
       <div className={classes.controlBtns}>
         <Button
           variant="contained"

@@ -17,19 +17,19 @@ function Confirm(props) {
       </ListItem>
     );
   });
-  // for (let value of props.enteredValues) {
-  //   <ListItemText primary="ddd" />;
-  // }
 
   console.log(userInfo);
 
   // on click, update step state by calling handleNextStep
   const handleNextBtnClick = e => {
     console.log(props);
-    // e.preventDefault();
+    e.preventDefault();
     // process form
     // send your data to your API (flux, python php)
-    props.handleNextStep();
+
+    if (props.inputValue.validate) {
+      props.handleNextStep();
+    }
   };
 
   const handlePrevBtnClick = () => {
@@ -39,7 +39,7 @@ function Confirm(props) {
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
-        <Typography variant="h6" className={classes.title} align="center">
+        <Typography variant="h1" className={classes.formTitle} align="center">
           Confirm
         </Typography>
       </AppBar>
@@ -48,7 +48,18 @@ function Confirm(props) {
         <List>{summaryList}</List>
         {/* <List>{generate(<ListItem>{listSummary}</ListItem>)}</List> */}
       </div>
-
+      {props.inputValue.validate === false && (
+        <div className={classes.messageContainer}>
+          <Typography
+            variant="h2"
+            className={`${classes.title} ${classes.errorMessage}`}
+            align="center"
+            role="alert"
+          >
+            Errors! - There are errors in this form, please go back to fix them
+          </Typography>
+        </div>
+      )}
       <div className={classes.controlBtns}>
         <Button
           variant="contained"
@@ -61,6 +72,7 @@ function Confirm(props) {
         <Button
           variant="contained"
           color="primary"
+          type="submit"
           className={`${classes.button} ${classes.alignRigth}`}
           onClick={handleNextBtnClick}
         >

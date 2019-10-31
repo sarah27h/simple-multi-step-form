@@ -7,15 +7,19 @@ function Success() {
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
-        <Typography variant="h6" className={classes.title} align="center">
+        <Typography variant="h1" className={classes.formTitle} align="center">
           Success
         </Typography>
       </AppBar>
-      <div className={classes.successMessage}>
-        <Typography variant="body1" className={classes.title} align="center">
+      <div className={classes.messageContainer}>
+        <Typography
+          variant="h2"
+          className={`${classes.title} ${classes.successMessage}`}
+          align="center"
+        >
           Thank you for your submission!
         </Typography>
-        <Typography variant="body2" className={classes.title} align="center">
+        <Typography variant="h2" className={classes.title} align="center">
           you will get an email with further instructions
         </Typography>
       </div>
