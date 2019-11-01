@@ -8,7 +8,7 @@ function Success() {
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
         <Typography variant="h1" className={classes.formTitle} align="center">
-          Success
+          Success <span>(Finished)</span>
         </Typography>
       </AppBar>
       <div className={classes.messageContainer}>

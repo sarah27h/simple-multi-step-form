@@ -30,7 +30,7 @@ function FormUserDetails(props) {
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
         <Typography variant="h1" className={classes.formTitle} align="center">
-          Enter Personal Details
+          Enter User Details <span>(Step {props.inputValue.step} of 3)</span>
         </Typography>
       </AppBar>
 
