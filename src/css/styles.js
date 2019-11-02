@@ -25,7 +25,16 @@ export const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    maxWidth: 250
+    maxWidth: 250,
+    '& label.Mui-focused': {
+      color: '#e72400'
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#e72400'
+    },
+    '& .MuiFormLabel-root.Mui-error': {
+      color: '#e72400'
+    }
   },
   controlBtns: {
     maxWidth: 400,
@@ -66,6 +75,7 @@ export const useStyles = makeStyles(theme => ({
     margin: '20px 0'
   },
   errorMessage: {
-    color: 'red'
+    color: '#ee0000',
+    fontSize: '13px'
   }
 }));
