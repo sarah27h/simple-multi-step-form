@@ -2,35 +2,42 @@ import React, { Fragment } from 'react';
 import { AppBar, Typography, TextField, Button } from '@material-ui/core';
 import { useStyles } from '../css/styles';
 
-function FormUserDetails(props) {
+function FormUserDetails({
+  handleNextStep,
+  onFieldChange,
+  inputValue,
+  onFieldFocus,
+  onFieldBlur,
+  formErrors
+}) {
   const classes = useStyles();
 
   // on click, update step state by calling handleNextStep
   const handleNextBtnClick = () => {
-    props.handleNextStep();
+    handleNextStep();
   };
 
   // on change, pass input value to <MainForm />
   const handleChange = e => {
     e.preventDefault();
-    props.onFieldChange(e.target);
-    console.log(props.formErrors);
+    onFieldChange(e.target);
+    console.log(formErrors);
   };
 
   const handleFocus = e => {
-    props.onFieldFocus(e.target);
+    onFieldFocus(e.target);
   };
 
   const handleBlur = e => {
-    props.onFieldBlur(e.target);
+    onFieldBlur(e.target);
   };
-  console.log(props.formErrors);
+  console.log(formErrors);
 
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
         <Typography variant="h1" className={classes.formTitle} align="center">
-          Enter User Details <span>(Step {props.inputValue.step} of 3)</span>
+          Enter User Details <span>(Step {inputValue.step} of 3)</span>
         </Typography>
       </AppBar>
 
@@ -41,14 +48,14 @@ function FormUserDetails(props) {
         margin="normal"
         className={`${classes.center} ${classes.textField}`}
         fullWidth={true}
-        value={props.inputValue.name}
-        error={props.formErrors.name.length > 0 ? true : false}
+        value={inputValue.name}
+        error={formErrors.name.length > 0 ? true : false}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         aria-describedby="name-error"
       />
-      {props.formErrors.name.length > 0 && (
+      {formErrors.name.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
@@ -56,7 +63,7 @@ function FormUserDetails(props) {
           id="name-error"
           aria-live="assertive"
         >
-          Error: name require {props.formErrors.name}
+          Error: name require {formErrors.name}
         </Typography>
       )}
 
@@ -67,15 +74,15 @@ function FormUserDetails(props) {
         margin="normal"
         className={`${classes.center} ${classes.textField}`}
         fullWidth={true}
-        value={props.inputValue.email}
-        error={props.formErrors.email.length > 0 ? true : false}
+        value={inputValue.email}
+        error={formErrors.email.length > 0 ? true : false}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         aria-describedby="email-error"
       />
 
-      {props.formErrors.email.length > 0 && (
+      {formErrors.email.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
@@ -83,7 +90,7 @@ function FormUserDetails(props) {
           id="email-error"
           aria-live="assertive"
         >
-          Error: email require {props.formErrors.email}
+          Error: email require {formErrors.email}
         </Typography>
       )}
 

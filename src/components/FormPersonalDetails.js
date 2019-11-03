@@ -2,38 +2,47 @@ import React, { Fragment } from 'react';
 import { AppBar, Typography, TextField, Button } from '@material-ui/core';
 import { useStyles } from '../css/styles';
 
-function FormPersonalDetails(props) {
+function FormPersonalDetails({
+  handleNextStep,
+  handlePrevStep,
+  onFieldChange,
+  inputValue,
+  onFieldFocus,
+  onFieldBlur,
+  formErrors,
+  formValidate
+}) {
   const classes = useStyles();
 
   // on click, update step state by calling handleNextStep
   const handleNextBtnClick = () => {
-    props.handleNextStep();
-    props.formValidate(props.inputValue);
+    handleNextStep();
+    formValidate(inputValue);
   };
 
   const handlePrevBtnClick = () => {
-    props.handlePrevStep();
+    handlePrevStep();
   };
 
   // on change, pass input value to <MainForm />
   const handleChange = e => {
     e.preventDefault();
-    props.onFieldChange(e.target);
+    onFieldChange(e.target);
   };
 
   const handleFocus = e => {
-    props.onFieldFocus(e.target);
+    onFieldFocus(e.target);
   };
 
   const handleBlur = e => {
-    props.onFieldBlur(e.target);
+    onFieldBlur(e.target);
   };
 
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
         <Typography variant="h1" className={classes.formTitle} align="center">
-          Enter Personal Details <span>(Step {props.inputValue.step} of 3)</span>
+          Enter Personal Details <span>(Step {inputValue.step} of 3)</span>
         </Typography>
       </AppBar>
 
@@ -43,8 +52,8 @@ function FormPersonalDetails(props) {
         margin="normal"
         className={`${classes.center} ${classes.textField}`}
         fullWidth={true}
-        value={props.inputValue.city}
-        error={props.formErrors.city.length > 0 ? true : false}
+        value={inputValue.city}
+        error={formErrors.city.length > 0 ? true : false}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -52,7 +61,7 @@ function FormPersonalDetails(props) {
         aria-invalid="false"
       />
 
-      {props.formErrors.city.length > 0 && (
+      {formErrors.city.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
@@ -60,7 +69,7 @@ function FormPersonalDetails(props) {
           id="city-erro"
           aria-live="assertive"
         >
-          Error: city require {props.formErrors.city}
+          Error: city require {formErrors.city}
         </Typography>
       )}
 
@@ -72,9 +81,9 @@ function FormPersonalDetails(props) {
         className={`${classes.center} ${classes.textField}`}
         fullWidth={true}
         margin="normal"
-        value={props.inputValue.bio}
-        helperText={`character Numbers ${props.inputValue.bio.length}`}
-        error={props.formErrors.bio.length > 0 ? true : false}
+        value={inputValue.bio}
+        helperText={`character Numbers ${inputValue.bio.length}`}
+        error={formErrors.bio.length > 0 ? true : false}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -82,7 +91,7 @@ function FormPersonalDetails(props) {
         aria-invalid="false"
       />
 
-      {props.formErrors.bio.length > 0 && (
+      {formErrors.bio.length > 0 && (
         <Typography
           variant="body2"
           className={`${classes.title} ${classes.errorMessage}`}
@@ -90,7 +99,7 @@ function FormPersonalDetails(props) {
           id="bio-error"
           aria-live="assertive"
         >
-          Error: bio character Numbers {props.inputValue.bio.length} and {props.formErrors.bio}
+          Error: bio character Numbers {inputValue.bio.length} and {formErrors.bio}
         </Typography>
       )}
 
