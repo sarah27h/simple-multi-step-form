@@ -3,17 +3,17 @@ import { AppBar, Typography, List, ListItemText, Button } from '@material-ui/cor
 import ListItem from '@material-ui/core/ListItem';
 import { useStyles } from '../css/styles';
 
-function Confirm(props) {
+function Confirm({ handleNextStep, handlePrevStep, enteredValues, inputValue }) {
   const classes = useStyles();
 
   const userInfo = [];
-  for (let field in props.enteredValues) {
+  for (let field in enteredValues) {
     userInfo.push(field);
   }
   const summaryList = userInfo.map((info, index) => {
     return (
       <ListItem key={index}>
-        <ListItemText className="listText" primary={info} secondary={props.enteredValues[info]} />
+        <ListItemText className="listText" primary={info} secondary={enteredValues[info]} />
       </ListItem>
     );
   });
@@ -22,25 +22,24 @@ function Confirm(props) {
 
   // on click, update step state by calling handleNextStep
   const handleNextBtnClick = e => {
-    console.log(props);
     e.preventDefault();
     // process form
     // send your data to your API (flux, python php)
 
-    if (props.inputValue.validate) {
-      props.handleNextStep();
+    if (inputValue.validate) {
+      handleNextStep();
     }
   };
 
   const handlePrevBtnClick = () => {
-    props.handlePrevStep();
+    handlePrevStep();
   };
 
   return (
     <Fragment>
       <AppBar position="static" color="primary" className={classes.root}>
         <Typography variant="h1" className={classes.formTitle} align="center">
-          Confirm <span>(Step {props.inputValue.step} of 3)</span>
+          Confirm <span>(Step {inputValue.step} of 3)</span>
         </Typography>
       </AppBar>
 
@@ -48,7 +47,7 @@ function Confirm(props) {
         <List>{summaryList}</List>
         {/* <List>{generate(<ListItem>{listSummary}</ListItem>)}</List> */}
       </div>
-      {props.inputValue.validate === false && (
+      {inputValue.validate === false && (
         <div className={classes.messageContainer}>
           <Typography
             variant="h2"
