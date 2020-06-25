@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/simple-multi-step-form/static/css/main.b100e6da.chunk.css",
+    "main.js": "/simple-multi-step-form/static/js/main.57a241ca.chunk.js",
+    "main.js.map": "/simple-multi-step-form/static/js/main.57a241ca.chunk.js.map",
+    "runtime-main.js": "/simple-multi-step-form/static/js/runtime-main.e6895ca4.js",
+    "runtime-main.js.map": "/simple-multi-step-form/static/js/runtime-main.e6895ca4.js.map",
+    "static/js/2.f411d351.chunk.js": "/simple-multi-step-form/static/js/2.f411d351.chunk.js",
+    "static/js/2.f411d351.chunk.js.map": "/simple-multi-step-form/static/js/2.f411d351.chunk.js.map",
+    "index.html": "/simple-multi-step-form/index.html",
+    "precache-manifest.9d11549e8bbf3c7fd1845b1625d8f8c1.js": "/simple-multi-step-form/precache-manifest.9d11549e8bbf3c7fd1845b1625d8f8c1.js",
+    "service-worker.js": "/simple-multi-step-form/service-worker.js",
+    "static/css/main.b100e6da.chunk.css.map": "/simple-multi-step-form/static/css/main.b100e6da.chunk.css.map"
+  }
+}
